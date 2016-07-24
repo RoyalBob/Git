@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Contacts</string>
+    <string name="action_search">搜索联系人</string>
+    <string name="action_add">添加联系人</string>
+    <string name="action_settings">设置来电铃声</string>
+    <string name="action_importContacts">导入系统联系人</string>
+    <string name="btn_mok">确认</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_del">删除联系人</string>
+    <string name="menu_aloneRingtong">单独设置铃声</string>
+
+</resources>
