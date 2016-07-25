@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,8 +19,8 @@ import java.net.Socket;
 
 public class TCPServerActivity extends AppCompatActivity {
 
-    private Button btn_send;
-    private EditText edt_msg;
+    private Button btn_send, btn_connect;
+    private EditText edt_msg, edt_port_tcpserver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,39 +28,39 @@ public class TCPServerActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("TCP Server");
         btn_send = (Button)findViewById(R.id.btn_send);
+        btn_connect = (Button)findViewById(R.id.btn_connect);
+        edt_port_tcpserver = (EditText)findViewById(R.id.edt_port_tcpserver);
         edt_msg = (EditText)findViewById(R.id.edt_msg);
 
-        //btn_send.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View view) {
+        btn_connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        TCPServer();
+                        TCPServer(Integer.parseInt(edt_port_tcpserver.getText().toString()));
                     }
                 });
-            //}
-        //});
+            }
+        });
     }
 
-    private void TCPServer(){
+    private void TCPServer(int port){
         try {
-            ServerSocket server = new ServerSocket(8888);
+            ServerSocket server = new ServerSocket(port);
             //等待客户端连接
-            while(true) {
-                Socket client = server.accept();
-                InputStream input = client.getInputStream();
-                OutputStream output = client.getOutputStream();
+            Socket client = server.accept();
+            InputStream input = client.getInputStream();
+            OutputStream output = client.getOutputStream();
 
-                byte message[] = new byte[1024];
-                int len = input.read(message);
-                Log.v("TCP Server", "message from client:" + new String(message, 0, len));
+            byte message[] = new byte[1024];
+            int len = input.read(message);
+            Log.v("TCP Server", "message from client:" + new String(message, 0, len));
 
-                String sendString = "Server it is!";
-                output.write(sendString.getBytes());
-                client.close();
-                server.close();
-            }
+            String sendString = "Server it is!";
+            output.write(sendString.getBytes());
+            client.close();
+            server.close();
 
         } catch (IOException e) {
             e.printStackTrace();

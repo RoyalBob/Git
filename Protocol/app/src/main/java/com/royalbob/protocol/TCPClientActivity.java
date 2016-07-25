@@ -51,7 +51,7 @@ public class TCPClientActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Message msg = new Message();
-                        msg.obj = TCPClient(edt_address_tcpsend.getText().toString(), Integer.parseInt(edt_port_tcpsend.getText().toString()));
+                        msg.obj = TCPClient(edt_address_tcpsend.getText().toString(), Integer.parseInt(edt_port_tcpsend.getText().toString()), edt_msg_tcpsend.getText().toString());
                         handler.sendMessage(msg);
                     }
                 }).start();
@@ -68,7 +68,7 @@ public class TCPClientActivity extends AppCompatActivity {
         edt_address_tcpsend = (EditText)findViewById(R.id.edt_address_tcpsend);
     }
 
-    private String TCPClient(String address, int port) {
+    private String TCPClient(String address, int port, String msg) {
         try {
             Socket client = new Socket(address, port);
             InputStream input = client.getInputStream();
@@ -78,8 +78,8 @@ public class TCPClientActivity extends AppCompatActivity {
             receiveData = new String(message,0,len);
             Log.v("TCP SERVER", "message from server:" + receiveData);
 
-            String sendString = "Client it is!";
-            output.write(sendString.getBytes());
+            //String sendString = "Client it is!";
+            output.write(msg.getBytes());
             client.close();
         } catch (IOException e) {
             e.printStackTrace();
