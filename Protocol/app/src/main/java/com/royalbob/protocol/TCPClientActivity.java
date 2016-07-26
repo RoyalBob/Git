@@ -106,7 +106,7 @@ public class TCPClientActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }else if (item.getItemId() == R.id.action_tcpClient){
-            Toast.makeText(getApplicationContext(), "请勿切换至本页面！", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "请勿切换至本页面！", Toast.LENGTH_LONG).show();
             return true;
         }else if (item.getItemId() == R.id.action_tcpServer){
             finish();
