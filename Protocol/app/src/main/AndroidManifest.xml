@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat">
-        <activity android:name="com.royalbob.protocol.UDPSendActivity"
+        <activity android:name="UDPSendActivity"
             android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +28,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.royalbob.protocol.UDPReceiveActivity"/>
+        <activity android:name=".UDPReceiveActivity"/>
 
-        <activity android:name="com.royalbob.protocol.TCPClientActivity"/>
+        <activity android:name=".TCPClientActivity"/>
 
-        <activity android:name="com.royalbob.protocol.TCPServerActivity"/>
+        <activity android:name=".TCPServerActivity"/>
     </application>
 
 </manifest>

@@ -26,10 +26,16 @@ import java.net.Socket;
 
 public class TCPServerActivity extends AppCompatActivity {
 
-    private Button btn_connect;
-    private EditText edt_port_tcpserver;
+    private Button btn_connect = null;
+
+    private EditText edt_port_tcpserver = null;
+    private EditText edit_receive = null;
+    private EditText edit_send = null;
+    private Button btn_send = null;
+    private boolean isConnected = false;
+
     private TextView tv_receiveData_tcpserver;
-    private String resultData="";
+    private String resultData="", finalData = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +46,6 @@ public class TCPServerActivity extends AppCompatActivity {
         edt_port_tcpserver = (EditText)findViewById(R.id.edt_port_tcpserver);
         tv_receiveData_tcpserver = (TextView)findViewById(R.id.tv_receiveData_tcpserver);
 
-        final Handler handler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                tv_receiveData_tcpserver.setText(msg.obj.toString());
-            }
-        };
         btn_connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,6 +61,15 @@ public class TCPServerActivity extends AppCompatActivity {
         });
     }
 
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            finalData += msg.obj.toString() + "\n";
+            tv_receiveData_tcpserver.setText(finalData);
+        }
+    };
+
     private String TCPServer(int port){
         try {
             ServerSocket server = new ServerSocket(port);
@@ -70,13 +78,15 @@ public class TCPServerActivity extends AppCompatActivity {
             InputStream input = client.getInputStream();
             OutputStream output = client.getOutputStream();
 
-            byte message[] = new byte[1024];
-            int len = input.read(message);
-            resultData = resultData + new String(message, 0, len) + "\n";
-            Log.v("TCP Server", "message from client:" + new String(message, 0, len));
+            //if(input!=null) {
+                byte message[] = new byte[1024];
+                int len = input.read(message);
+                resultData = new String(message, 0, len);
+                Log.v("TCP Server", "message from client:" + new String(message, 0, len));
 
-            String sendString = "Server it is!";
-            output.write(sendString.getBytes());
+                String sendString = "Server it is!";
+                output.write(sendString.getBytes());
+            //}
             client.close();
             server.close();
 
