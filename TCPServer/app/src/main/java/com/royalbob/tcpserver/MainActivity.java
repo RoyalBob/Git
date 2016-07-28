@@ -15,12 +15,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 public class MainActivity extends Activity {
 
     ServerSocket serverSocket;//创建ServerSocket对象
     Socket clicksSocket;//连接通道，创建Socket对象
-    Button startButton;//发送按钮
+    Button startButton;//启动监听按钮
     EditText portEditText;//端口号
     TextView receiveTextView;//接收消息框
     Button sendButton;//发送按钮

@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
     EditText IPEditText;//定义ip输入框
     EditText PortText;//定义端口输入框
     EditText MsgEditText;//定义信息输出框
-    TextView RrceiveTextView;//定义信息输入框
+    TextView ReceiveTextView;//定义信息输入框
     Socket socket = null;//定义socket
     private OutputStream outputStream=null;//定义输出流
     private InputStream inputStream=null;//定义输入流
@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
         IPEditText = (EditText) findViewById(R.id.ip_ET);//获得ip文本框对象
         PortText = (EditText) findViewById(R.id.Port_ET);//获得端口文本框按钮对象
         MsgEditText = (EditText) findViewById(R.id.Send_ET);//获得发送消息文本框对象
-        RrceiveTextView = (TextView) findViewById(R.id.Receive_TV);//获得接收消息文本框对象
+        ReceiveTextView = (TextView) findViewById(R.id.Receive_TV);//获得接收消息文本框对象
     }
 
     public void Connect_onClick(View v) {
@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
                     runOnUiThread(new Runnable()//不允许其他线程直接操作组件，用提供的此方法可以
                     {
                         public void run() {
-                            RrceiveTextView.setText(new String(buffer,0,len));
+                            ReceiveTextView.setText(new String(buffer,0,len));
                         }
                     });
                 }

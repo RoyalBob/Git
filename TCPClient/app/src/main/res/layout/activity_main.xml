@@ -36,7 +36,6 @@
     <!-- 用于填写ip地址的文本框-->
     <EditText
         android:text="192.168.1.116"
-        android:inputType="numberDecimal"
         android:id="@+id/ip_ET"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

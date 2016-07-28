@@ -80,6 +80,7 @@ public class UDPReceiveActivity extends AppCompatActivity {
             receiveData = new String(datagramPacket.getData()).trim();
             Log.v("UDP Receive Demo","接收到的数据是:" + receiveData + "\n在端口:" + port);
             socket.close();
+
         } catch (SocketException e) {
             Log.v("UDP Receive Demo","SocketException" +  e);
         } catch (IOException e) {
