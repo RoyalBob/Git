@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mrlimrli:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="mrlimrli-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="mrlimrli:war exploded" />
+    </root>
+  </artifact>
+</component>
